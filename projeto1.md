@@ -70,7 +70,7 @@ void randomPixels(){
 <p align="center">
 	<br>
 	<img src="./images/2_youtube.png">
-	<h5 align="center">Figura 2: PutPixel() gerando pontos randômicos</h5>
+	<h5 align="center">Figura 2: PutPixel() gerando pontos randômicos - [Video](https://www.youtube.com/watch?v=_GSBJzKuFSA)</h5>
 	<br>
 </p>
 
@@ -80,7 +80,12 @@ Para que possamos desenhar uma linha, é necessário que tenhamos acesso à, ao 
 Matemáticamente, linhas possuem *infinitos* pontos. já monitores possuem apenas um número limitado de pixels.
 ou seja, só é possível desenhar *aproximações* de tais linhas: um dos algorítimos ensinados em sala de aula é o [Algorítimo de Bresenham](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm), que, em sua forma não-geral, nos permite desenhar linhas de até, no máximo, 45 graus.
 
-Para **generalizar** a funcionalidade deste algorítimo e fazer com que tal funcione em todos os 8 possíveis octantes da tela é entender que:
+Para **generalizar** a funcionalidade deste algorítimo e fazer com que tal funcione em todos os possiveis níveis de inclinação da tela é entender que:
+* calculamos a distancia em coordenadas entre o valor do x e y final e inicial. (dx e dy).
+* através desse calculo, podemos obter um total de 8 possíveis casos:
+	* dx > 0 e dy > 0: utilizamos o algoritimo original, sem modificações
+	* dx < 0 e dy < 0: espelhamos o valor de
+360/45 = 8
 * precisamos *espelhar*
 
 
@@ -93,7 +98,7 @@ void drawLine(pixel start, pixel end){
 
     s8 dx =  abs(x1-x0), sx = x0<x1 ? 1 : -1;
     s8 dy = -abs(y1-y0), sy = y0<y1 ? 1 : -1; 
-    s8 err = dx+dy, e2; /* error value e_xy */
+    s8 err = dx+dy, e2; 
  
 
 while(true){ 
@@ -122,4 +127,5 @@ Bresenham's line algorithm - Wikipédia https://en.wikipedia.org/wiki/Bresenham%
 
 The Beauty of Bresenham's Algorithm - http://members.chello.at/easyfilter/bresenham.html
 
-Bresenham Algorithm - Optimized Line Drawing Code](https://wrf.ecse.rpi.edu//Research/Short_Notes/bresenham.html
+Bresenham Algorithm - Optimized Line Drawing Code - https://wrf.ecse.rpi.edu//Research/Short_Notes/bresenham.html
+Ednaldo Martins - Rasteirização de Linhas - https://ednaldomartinscg2016.blogspot.com/2017/02/v-behaviorurldefaultvmlo.html
