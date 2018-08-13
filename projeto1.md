@@ -175,7 +175,7 @@ void drawLine(pixel start, pixel end){
 <p align="center">
 	<br>
 	<img src="./images/color_line.png">
-	<h5 align="center">Figura 5: exemplos de linhas com interpoçacao de cor</h5>
+	<h5 align="center">Figura 5: exemplos de linhas com interpolacão de cor</h5>
 	<br>
 </p>
 
