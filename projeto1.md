@@ -41,9 +41,8 @@ Para podermos pintar um pixel na tela, devemos seguir esses passos:
 <img src="https://latex.codecogs.com/svg.latex?(x&plus;y*4)*4" title="(x+y*4)*4" />
 (onde x e y são as coordenadas horizontais e verticais da tela, respectivamente. )
 
-* a função putPixel() recebe um valor composto da estrutura pixel e o renderiza na tela.
+* a função putPixel() recebe uma estrutura pixel e preenche o array do Frame Buffer com os valores definidos dentro da estrutura, o renderizando na tela.
 
-* Funçao putPixel():
 ```c++
 void  putPixel(pixel px){
 u2 ptr = (IMAGE_WIDTH*px.p.y + px.p.x)*4;
@@ -59,4 +58,44 @@ FBptr[ptr+2] = px.c.b; FBptr[ptr+3] = px.c.a;
 	<br>
 </p>
 
-Para fazer um teste de estresse com a função putpixel(), [montamos um vídeo](https://www.youtube.com/watch?v=_GSBJzKuFSA) que mostra a renderização de vários pontos aleatórios da tela.
+
+Para fazer um teste de estresse com a função putpixel(), criamos um função de geração de pixeis aleatórios e [montamos um video](https://www.youtube.com/watch?v=_GSBJzKuFSA) que mostra a renderização de vários pontos aleatórios da tela utilizando essa função.
+
+```c++
+void randomPixels(){
+    pixel x = {{std::rand() % IMAGE_WIDTH, std::rand() % IMAGE_HEIGHT}, {std::rand() % 256, std::rand() % 256,std::rand() % 256}};
+    putPixel(x);
+}
+```
+
+<p align="center">
+	<br>
+	<a href=https://www.youtube.com/watch?v=_GSBJzKuFSA><img src="./images/2_youtube_putpixel.png"></a>
+	<h5 align="center">Figura 2: PutPixel() gerando pontos randômicos</h5>
+	<br>
+</p>
+
+# Parte 4: Desenhando Linhas com o Algorítimo de Bresenham
+
+```c++
+
+void drawLine(pixel start, pixel end){
+    s8 x0 = start.p.x, y0 = start.p.y;
+    s8 x1 = end.p.x, y1 = end.p.y;
+
+    s8 dx =  abs(x1-x0), sx = x0<x1 ? 1 : -1;
+    s8 dy = -abs(y1-y0), sy = y0<y1 ? 1 : -1; 
+    s8 err = dx+dy, e2; /* error value e_xy */
+ 
+
+while(true){ 
+    pixel px = {{x0, y0}, start.c};
+
+    putPixel(px);
+    if (x0==x1 && y0==y1) break;
+    s8 e2 = 2*err;
+    if (e2 >= dy) { err += dy; x0 += sx; } /* e_xy+e_x > 0 */
+    if (e2 <= dx) { err += dx; y0 += sy; } /* e_xy+e_y < 0 */
+}
+}
+```
