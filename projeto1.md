@@ -80,15 +80,21 @@ Para que possamos desenhar uma linha, é necessário que tenhamos acesso à, ao 
 Matemáticamente, linhas possuem *infinitos* pontos. já monitores possuem apenas um número limitado de pixels.
 ou seja, só é possível desenhar *aproximações* de tais linhas: um dos algorítimos ensinados em sala de aula é o [Algorítimo de Bresenham](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm), que, em sua forma não-geral, nos permite desenhar linhas de até, no máximo, 45 graus.
 
-Para **generalizar** a funcionalidade deste algorítimo e fazer com que tal funcione em todos os possiveis níveis de inclinação da tela é entender que, é necessário *espelhar* 
+Para **generalizar** a funcionalidade deste algorítimo e fazer com que tal funcione em todos os possiveis níveis de inclinação da tela é entender que, é necessário observar em qual octante a linha vai ser desenhada, para configurar os incrementos ou decrementos à serem feitos ao desenhar a linha.
 
-* calculamos a distancia entre o valor do x e y final e inicial. (dx e dy)
+<p align="center">
+	<br>
+	<img src="./images/3_octantes.png">
+	<h5 align="center">Figura 3: Representação dos Octantes()</h5>
+	<br>
+</p>
+
+* calculamos a distancia absoluta entre o valor do x e y final e inicial. (dx e dy)
 * criamos uma variavel para verificar se devemos incrementar ou decrementar os valores de x e y no desenho da linha (ix e iy)
-	* tanto para o x e y caso inicio seja menor que o fim, incrementa o valor do pixel à ser pintado, caso contrário decrementa.
+	* tanto para o cada caso x e y, se o valor do inicio for menor que o fim, seta-se que o loop do programar irá incrementar o valor do pixel à ser pintado, caso contrario, ele será decrementado.
 * assim, podemos tratar todos os possíveis casos, pois podemos escolher individualmente decrementar o eixo x ou y.
 
-
-
+### Implementação da função
 ```c++{% raw %}
 void drawLine(pixel start, pixel end){
     /* desempacotando o pixel */
@@ -107,7 +113,7 @@ void drawLine(pixel start, pixel end){
         pixel px = {{x0, y0}, px.c};
         putPixel(px);
         if (x0==x1 && y0==y1) break; // para quando o destino for a origem
-        s8 er2 = 2*err;
+        s8 er2 = 2*err; // calculo do err
         if (er2 >= dy) { err += dy; x0 += ix; } 
         if (er2 <= dx) { err += dx; y0 += iy; } 
     }
@@ -117,7 +123,7 @@ void drawLine(pixel start, pixel end){
 <p align="center">
 	<br>
 	<img src="./images/3_lines.png">
-	<h5 align="center">Figura 3: exemplos de linhas gerandas pelo drawLine()</h5>
+	<h5 align="center">Figura 4: exemplos de linhas gerandas pelo drawLine()</h5>
 	<br>
 </p>
 
