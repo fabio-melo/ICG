@@ -2,7 +2,6 @@
 
 Este artigo irá documentar uma das atividades executadas na disciplina "Introdução á Computação Gráfica", Ministrada pelo professor Christan Pagot da Universidade Fedaral da Paraíba.
 
-## Indice
 
 
 ## Parte 1: Setup.
@@ -35,7 +34,7 @@ typedef struct{pos p; color c;}pixel; //ambos
 Para este projeto, utilizamos o framework fornecido pelo professor para simular o acesso direto ao Frame Buffer do monitor.
 
 
-Para podermos pintar um pixel na tela, devemos seguir esses passos:
+Para podermos pintar um pixel na tela, isto é, rasteirizá-lo, devemos seguir esses passos:
 * Neste framework, cada Pixel possui 4 bytes, sendo cada um deles responsável por uma caracteristica de cor (RGBA), indicados por posições no array **FBptr[]**
 * Precisamos calcular o offset de cada pixel que precisamos pintar, utilizamos a seguinte fórmula:
 <img src="https://latex.codecogs.com/svg.latex?(x&plus;y*4)*4" title="(x+y*4)*4" />
@@ -75,7 +74,16 @@ void randomPixels(){
 	<br>
 </p>
 
-# Parte 4: Desenhando Linhas com o Algorítimo de Bresenham
+# Parte 4: Rasteirizando Linhas com a função drawLine()
+
+Para que possamos desenhar uma linha, é necessário que tenhamos acesso à, ao menos dois pontos por onde ela passa.
+Matemáticamente, linhas possuem *infinitos* pontos. já monitores possuem apenas um número limitado de pixels.
+ou seja, só é possível desenhar *aproximações* de tais linhas: um dos algorítimos ensinados em sala de aula é o [Algorítimo de Bresenham](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm), que, em sua forma não-geral, nos permite desenhar linhas de até, no máximo, 45 graus.
+
+Para **generalizar** a funcionalidade deste algorítimo e fazer com que tal funcione em todos os 8 possíveis octantes da tela é entender que:
+* precisamos *espelhar*
+
+
 
 ```c++
 
@@ -99,3 +107,10 @@ while(true){
 }
 }
 ```
+
+
+Referências:
+[Gerador de Pontos] (https://www.librec.net/datagen.html)
+[Bresenham's line algorithm - Wikipédia](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm)
+[The Beauty of Bresenham's Algorithm] (http://members.chello.at/easyfilter/bresenham.html)
+[Bresenham Algorithm - Optimized Line Drawing Code](https://wrf.ecse.rpi.edu//Research/Short_Notes/bresenham.html)
