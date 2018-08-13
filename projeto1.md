@@ -216,3 +216,4 @@ The Beauty of Bresenham's Algorithm - http://members.chello.at/easyfilter/bresen
 Bresenham Algorithm - Optimized Line Drawing Code - https://wrf.ecse.rpi.edu//Research/Short_Notes/bresenham.html
 
 Ednaldo Martins - Rasteirização de Linhas - https://ednaldomartinscg2016.blogspot.com/2017/02/v-behaviorurldefaultvmlo.html
+
