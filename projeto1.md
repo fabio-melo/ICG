@@ -69,7 +69,7 @@ void randomPixels(){
 
 <p align="center">
 	<br>
-	[<img src="./images/2_youtube.png">](https://www.youtube.com/watch?v=_GSBJzKuFSA)
+	<img src="./images/2_youtube.png">
 	<h5 align="center">Figura 2: PutPixel() gerando pontos randômicos</h5>
 	<br>
 </p>
