@@ -42,13 +42,13 @@ Para podermos pintar um pixel na tela, isto é, rasteirizá-lo, devemos seguir e
 
 * a função putPixel() recebe uma estrutura pixel e preenche o array do Frame Buffer com os valores definidos dentro da estrutura, o renderizando na tela.
 
-```c++
+```c++{% raw %}
 void  putPixel(pixel px){
 u2 ptr = (IMAGE_WIDTH*px.p.y + px.p.x)*4;
 FBptr[ptr] = px.c.r;   FBptr[ptr+1] = px.c.g;
 FBptr[ptr+2] = px.c.b; FBptr[ptr+3] = px.c.a;
 }
-```
+```{% endraw %}
 
 <p align="center">
 	<br>
@@ -60,6 +60,12 @@ FBptr[ptr+2] = px.c.b; FBptr[ptr+3] = px.c.a;
 
 Para fazer um teste de estresse com a função putpixel(), criamos um função de geração de pixeis aleatórios e [montamos um video](https://www.youtube.com/watch?v=_GSBJzKuFSA) que mostra a renderização de vários pontos aleatórios da tela utilizando essa função.
 
+```cpp{% raw %}
+void randomPixels(){
+    pixel x = {{std::rand() % IMAGE_WIDTH, std::rand() % IMAGE_HEIGHT}, {std::rand() % 256, std::rand() % 256,std::rand() % 256}};
+    putPixel(x);
+}{% endraw %}
+```
 
 <p align="center">
 	<br>
@@ -79,7 +85,7 @@ Para **generalizar** a funcionalidade deste algorítimo e fazer com que tal func
 
 
 
-```c++
+```c++{% raw %}
 
 void drawLine(pixel start, pixel end){
     s8 x0 = start.p.x, y0 = start.p.y;
@@ -100,7 +106,7 @@ while(true){
     if (e2 <= dx) { err += dx; y0 += sy; } /* e_xy+e_y < 0 */
 }
 }
-```
+```{% endraw %}
 
 <p align="center">
 	<br>
