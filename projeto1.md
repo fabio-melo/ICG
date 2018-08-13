@@ -129,9 +129,75 @@ void drawLine(pixel start, pixel end){
 
 ## Parte 5: Interpolando Cores
 
+Nesse passo, iremos criar um gradiente que colorirá nossa reta do ponto inicial ao final. indo da cor de um ponto, para a cor do outro, utilizando uma técnica chamada Interpolação Linear. [(mais informações aqui)](https://pt.wikipedia.org/wiki/Interpola%C3%A7%C3%A3o_linear) 
+
+* Passo 1: Para tal, devemos acessar os valores de cor dos pixels de inicio e fim, e subtraír o valor final do inicial, (em um processo similar ao calculo do dx e dy)
+* Passo 2: Também calculamos o tamanho total da linha, tirando a raiz do quadrado do dx somado ao quadrado do dy, que calculamos anteriormente.
+* Subtraindo o valor descoberto no passo 1 pela distância dos pixeis calculado no passo 2, podemos descobrir o incremento de cada valor RGBA para iteração do desenho do pixel.
+
+* fazendo as alterações necessarias na função DrawLine(), obtemos a seguinte função:
+```c++{% raw %}
+void drawLine(pixel start, pixel end){
+    /* desempacotando o pixel */
+    s8 x0 = start.p.x, y0 = start.p.y; 
+    s8 x1 = end.p.x, y1 = end.p.y;
+    /* dx e dy */
+    s8 dx =  abs(x1-x0); 
+    s8 dy = -abs(y1-y0);
+    /* incremento/decremento de x e y */
+    s8 ix = x0<x1 ? 1 : -1;
+    s8 iy = y0<y1 ? 1 : -1; 
+    s8 err = dx+dy;
+
+    /* interpolacao de cor */
+
+    f8 var = sqrt(pow(dx,2) + pow(dy,2));        
+    f8 r0 = start.c.r, g0 = start.c.g, b0 = start.c.b;
+    f8 mod_r = ((end.c.r - start.c.r) / var);
+    f8 mod_g = ((end.c.g - start.c.g) / var);
+    f8 mod_b = ((end.c.b - start.c.b) / var);
+
+    /* loop principal */
+
+    while(true){ 
+        color cx = {round(r0 += mod_r), round(g0 += mod_g), round(b0 += mod_b), 255};
+        pixel px = {{x0, y0}, cx};
+        putPixel(px);
+        if (x0==x1 && y0==y1) break;
+        s8 er2 = 2*err;
+        if (er2 >= dy) { err += dy; x0 += ix; } 
+        if (er2 <= dx) { err += dx; y0 += iy; } 
+    }
+}
+}{% endraw %}
+```
+
+<p align="center">
+	<br>
+	<img src="./images/color_line.png">
+	<h5 align="center">Figura 5: exemplos de linhas com interpoçacao de cor</h5>
+	<br>
+</p>
+
+
 ## Parte 5: Desenhando um Triangulo com o DrawTriangle()
 
-## Parte 6: Desenhando uma casinha com o DrawCasinha()
+Para desenhar um triângulo, basta escolher três pontos, e utilizar a função DrawLine de forma à criar um ciclo.
+
+### A função:
+```c++
+void drawTriangle(pixel a, pixel b, pixel c){
+    drawLine(a,b); drawLine(b,c); drawLine(c,a);
+}
+```
+
+<p align="center">
+	<br>
+	<img src="./images/triangle.png">
+	<h5 align="center">Figura 6: desenho de um Triângulo</h5>
+	<br>
+</p>
+
  
 
 ## Dificuldades:
@@ -149,4 +215,5 @@ Bresenham's line algorithm - Wikipédia https://en.wikipedia.org/wiki/Bresenham%
 The Beauty of Bresenham's Algorithm - http://members.chello.at/easyfilter/bresenham.html
 
 Bresenham Algorithm - Optimized Line Drawing Code - https://wrf.ecse.rpi.edu//Research/Short_Notes/bresenham.html
+
 Ednaldo Martins - Rasteirização de Linhas - https://ednaldomartinscg2016.blogspot.com/2017/02/v-behaviorurldefaultvmlo.html
