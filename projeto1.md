@@ -60,12 +60,6 @@ FBptr[ptr+2] = px.c.b; FBptr[ptr+3] = px.c.a;
 
 Para fazer um teste de estresse com a função putpixel(), criamos um função de geração de pixeis aleatórios e [montamos um video](https://www.youtube.com/watch?v=_GSBJzKuFSA) que mostra a renderização de vários pontos aleatórios da tela utilizando essa função.
 
-```cpp
-void randomPixels(){
-    pixel x = {{std::rand() % IMAGE_WIDTH, std::rand() % IMAGE_HEIGHT}, {std::rand() % 256, std::rand() % 256,std::rand() % 256}};
-    putPixel(x);
-}
-```
 
 <p align="center">
 	<br>
