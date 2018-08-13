@@ -13,7 +13,7 @@ sudo apt install libglu1-mesa-dev freeglut3-dev
 ```
 E também ferramenta [VcxSrv](https://sourceforge.net/projects/vcxsrv/) para podermos abrir um display X11 no sistema de janelas do Windows.
 
-Sem mais delongas, vamos ao código!
+Sem mais delongas, vamos ao desenvolvimento!
 
 ## Parte II: Desenhando na Tela
 Para este projeto, utilizamos o framework desenvolvido para simular o acesso direto ao Frame Buffer do monitor.
@@ -23,19 +23,26 @@ Para podermos pintar um pixel na tela, devemos seguir esses passos:
 * Neste framework, cada Pixel possui 4 bytes, sendo cada um deles responsável por uma caracteristica de cor (RGBA), indicados por posições no array **FBptr[]**
 * Precisamos calcular o offset de cada pixel que precisamos pintar, utilizamos a seguinte fórmula:
 <img src="https://latex.codecogs.com/svg.latex?(x&plus;y*4)*4" title="(x+y*4)*4" />
-(onde (x, y) são as coordenadas horizontais e verticais da tela, respectivamente. )
+(onde x e y são as coordenadas horizontais e verticais da tela, respectivamente. )
 
-Em código:
-
+Para simplificar a representação dessas informações em código, criamos estas estruturas:
 
 ```c++
-typedef unsigned char u1;
-typedef unsigned short int u2;
-typedef float f8;
-typedef struct{u2 r,g,b,a;}color;
-typedef struct{u2 x,y;}pos;
-typedef struct{pos p; color c;}pixel;
+typedef unsigned short int u2; // para simplificar a escrita
+typedef struct{u2 r,g,b,a;}color; //cor
+typedef struct{u2 x,y;}pos; // posição (x,y)
+typedef struct{pos p; color c;}pixel; //ambos
 ```
 
+* Funçao putPixel():
+```c++
+void  putPixel(pixel px){
+u2 ptr = (IMAGE_WIDTH*px.p.y + px.p.x)*4;
+FBptr[ptr] = px.c.r;
+FBptr[ptr+1] = px.c.g;
+FBptr[ptr+2] = px.c.b;
+FBptr[ptr+3] = px.c.a;
+}
+```
 
-* Para
+![desenhando quatro pontos](/images/1_quatro_pontos.png)
