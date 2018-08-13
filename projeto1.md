@@ -120,6 +120,12 @@ while(true){
 	<br>
 </p>
 
+## Dificuldades:
+* Em primeiro lugar, minha falta de familiaridade e experiência com a linguagem (C++), o que resultou em dezenas de tentativas de montagens de estruturas pythonescas e esquecimentos de ponto-e-virgula. até pensei em montar usando orientação a objeto, mas por fim decidir montar de maneira imperativa.
+* Encontrar uma forma relativamente compacta (e funcional) de generalizar o algoritimo de Bresenham para todos os octantes.
+* Sem dúvida alguma, a interpolação das cores nas linhas foi a parte mais difícil de montar. entre as dezenas de erros na montagem do meu código, um dos mais gritantes foi o conflito de tipos. já que cores são representadas como unsigned char (0-255) e a variação é representada como float, ela não estava sendo computada corretamente. demorei mais que algumas horas pra conseguir tal façanha.
+
+
 ## Referências:
 Gerador de Pontos para teste https://www.librec.net/datagen.html
 
