@@ -69,7 +69,7 @@ void randomPixels(){
 
 <p align="center">
 	<br>
-	<a href=https://www.youtube.com/watch?v=_GSBJzKuFSA><img src="./images/2_youtube_putpixel.png"></a>
+	<a href=https://www.youtube.com/watch?v=_GSBJzKuFSA><img src="./images/2_youtube.png"></a>
 	<h5 align="center">Figura 2: PutPixel() gerando pontos randômicos</h5>
 	<br>
 </p>
@@ -108,7 +108,12 @@ while(true){
 }
 ```
 
-
+<p align="center">
+	<br>
+	<img src="./images/3_lines.png">
+	<h5 align="center">Figura 3: exemplos de linhas gerandas pelo drawLine()</h5>
+	<br>
+</p>
 
 ## Referências:
 Gerador de Pontos para teste https://www.librec.net/datagen.html
