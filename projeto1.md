@@ -80,36 +80,37 @@ Para que possamos desenhar uma linha, é necessário que tenhamos acesso à, ao 
 Matemáticamente, linhas possuem *infinitos* pontos. já monitores possuem apenas um número limitado de pixels.
 ou seja, só é possível desenhar *aproximações* de tais linhas: um dos algorítimos ensinados em sala de aula é o [Algorítimo de Bresenham](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm), que, em sua forma não-geral, nos permite desenhar linhas de até, no máximo, 45 graus.
 
-Para **generalizar** a funcionalidade deste algorítimo e fazer com que tal funcione em todos os possiveis níveis de inclinação da tela é entender que:
-* calculamos a distancia em coordenadas entre o valor do x e y final e inicial. (dx e dy).
-* através desse calculo, podemos obter um total de 8 possíveis casos:
-	* dx > 0 e dy > 0: utilizamos o algoritimo original, sem modificações
-	* dx < 0 e dy < 0: espelhamos o valor de
-360/45 = 8
-* precisamos *espelhar*
+Para **generalizar** a funcionalidade deste algorítimo e fazer com que tal funcione em todos os possiveis níveis de inclinação da tela é entender que, é necessário *espelhar* 
+
+* calculamos a distancia entre o valor do x e y final e inicial. (dx e dy)
+* criamos uma variavel para verificar se devemos incrementar ou decrementar os valores de x e y no desenho da linha (ix e iy)
+	* tanto para o x e y caso inicio seja menor que o fim, incrementa o valor do pixel à ser pintado, caso contrário decrementa.
+* assim, podemos tratar todos os possíveis casos, pois podemos escolher individualmente decrementar o eixo x ou y.
 
 
 
 ```c++{% raw %}
-
 void drawLine(pixel start, pixel end){
-    s8 x0 = start.p.x, y0 = start.p.y;
+    /* desempacotando o pixel */
+    s8 x0 = start.p.x, y0 = start.p.y; //desempacota o pixel
     s8 x1 = end.p.x, y1 = end.p.y;
+    
+    /* incremento/decremento de x e y */
+    s8 ix = x0<x1 ? 1 : -1;
+    s8 iy = y0<y1 ? 1 : -1; 
+    
+    /* erros */ 
+    s8 err = dx+dy;
 
-    s8 dx =  abs(x1-x0), sx = x0<x1 ? 1 : -1;
-    s8 dy = -abs(y1-y0), sy = y0<y1 ? 1 : -1; 
-    s8 err = dx+dy, e2; 
- 
-
-while(true){ 
-    pixel px = {{x0, y0}, start.c};
-
-    putPixel(px);
-    if (x0==x1 && y0==y1) break;
-    s8 e2 = 2*err;
-    if (e2 >= dy) { err += dy; x0 += sx; } /* e_xy+e_x > 0 */
-    if (e2 <= dx) { err += dx; y0 += sy; } /* e_xy+e_y < 0 */
-}
+    /* loop de desenho da linha */
+    while(true){ 
+        pixel px = {{x0, y0}, px.c};
+        putPixel(px);
+        if (x0==x1 && y0==y1) break; // para quando o destino for a origem
+        s8 er2 = 2*err;
+        if (er2 >= dy) { err += dy; x0 += ix; } 
+        if (er2 <= dx) { err += dx; y0 += iy; } 
+    }
 }{% endraw %}
 
 ```
