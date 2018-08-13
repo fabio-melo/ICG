@@ -1,7 +1,6 @@
 ## Desenhando linhas e figuras geométricas no Computador: Computação Gráfica na Prática!
 
-Este artigo irá documentar uma das atividades executadas na disciplina "Introdução á Computação Gráfica", Ministrada pelo professor Christan Pagot da Universidade Fedaral da Paraíba.
-
+Este artigo irá documentar, na prática, como desenhar pontos, linhas e triângulos coloridos em um frame buffer, e é uma das atividades executadas na disciplina "Introdução á Computação Gráfica", Ministrada pelo professor Christan Pagot, na Universidade Fedaral da Paraíba.
 
 
 ## Parte 1: Setup.
