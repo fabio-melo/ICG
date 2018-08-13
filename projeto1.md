@@ -109,8 +109,12 @@ while(true){
 ```
 
 
-Referências:
-[Gerador de Pontos] (https://www.librec.net/datagen.html)
-[Bresenham's line algorithm - Wikipédia](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm)
-[The Beauty of Bresenham's Algorithm] (http://members.chello.at/easyfilter/bresenham.html)
-[Bresenham Algorithm - Optimized Line Drawing Code](https://wrf.ecse.rpi.edu//Research/Short_Notes/bresenham.html)
+
+## Referências:
+Gerador de Pontos para teste https://www.librec.net/datagen.html
+
+Bresenham's line algorithm - Wikipédia https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
+
+The Beauty of Bresenham's Algorithm - http://members.chello.at/easyfilter/bresenham.html
+
+Bresenham Algorithm - Optimized Line Drawing Code](https://wrf.ecse.rpi.edu//Research/Short_Notes/bresenham.html
