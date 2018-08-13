@@ -1,6 +1,8 @@
 ## Desenhando linhas e figuras geométricas no Computador: Computação Gráfica na Prática!
 
-Este artigo irá documentar uma das atividades executadas na disciplina "Introdução á Computação Gráfica", Ministrada pelo professor Christan Azambuja Pagot
+Este artigo irá documentar uma das atividades executadas na disciplina "Introdução á Computação Gráfica", Ministrada pelo professor Christan Pagot da Universidade Fedaral da Paraíba.
+
+## Indice
 
 
 ## Parte 1: Setup.
@@ -15,8 +17,22 @@ E também ferramenta [VcxSrv](https://sourceforge.net/projects/vcxsrv/) para pod
 
 Sem mais delongas, vamos ao desenvolvimento!
 
-## Parte II: Desenhando na Tela
-Para este projeto, utilizamos o framework desenvolvido para simular o acesso direto ao Frame Buffer do monitor.
+## Parte 2: Escolhas Técnicas
+
+Para este projeto, decidimos por criar algumas estruturas para representar as informações que serão utilizadas nos algorítimos e funções que serão desenvolvidas aqui, entre elas o renomeamento de alguns tipos para tornar a leitura do código mais concisa:
+* Montamos uma estrutura para armazenar os valores RGBA (color), uma para armazenar as coordenadas de posicionamento (pos), e uma que agrega estas duas (pixel). além disso, definimos por padrão algumas estruturas de valores de cores (RED, GREEN, BLUE, WHITE, etc).
+
+```c++
+typedef unsigned int u2; // para simplificar a escrita
+typedef struct{u2 r,g,b,a;}color; //cor
+typedef struct{u2 x,y;}pos; // posição (x,y)
+typedef struct{pos p; color c;}pixel; //ambos
+```
+
+
+## Parte 3: Desenhando na Tela, Ponto-a-Ponto.
+
+Para este projeto, utilizamos o framework fornecido pelo professor para simular o acesso direto ao Frame Buffer do monitor.
 
 
 Para podermos pintar um pixel na tela, devemos seguir esses passos:
@@ -25,24 +41,22 @@ Para podermos pintar um pixel na tela, devemos seguir esses passos:
 <img src="https://latex.codecogs.com/svg.latex?(x&plus;y*4)*4" title="(x+y*4)*4" />
 (onde x e y são as coordenadas horizontais e verticais da tela, respectivamente. )
 
-Para simplificar a representação dessas informações em código, criamos estas estruturas:
-
-```c++
-typedef unsigned short int u2; // para simplificar a escrita
-typedef struct{u2 r,g,b,a;}color; //cor
-typedef struct{u2 x,y;}pos; // posição (x,y)
-typedef struct{pos p; color c;}pixel; //ambos
-```
+* a função putPixel() recebe um valor composto da estrutura pixel e o renderiza na tela.
 
 * Funçao putPixel():
 ```c++
 void  putPixel(pixel px){
 u2 ptr = (IMAGE_WIDTH*px.p.y + px.p.x)*4;
-FBptr[ptr] = px.c.r;
-FBptr[ptr+1] = px.c.g;
-FBptr[ptr+2] = px.c.b;
-FBptr[ptr+3] = px.c.a;
+FBptr[ptr] = px.c.r;   FBptr[ptr+1] = px.c.g;
+FBptr[ptr+2] = px.c.b; FBptr[ptr+3] = px.c.a;
 }
 ```
 
-![desenhando quatro pontos](/images/1_quatro_pontos.png)
+<p align="center">
+	<br>
+	<img src="./images/1_quatro_pontos.png">
+	<h5 align="center">Figura 1: Desenhando quatro pontos coloridos na tela</h5>
+	<br>
+</p>
+
+Para fazer um teste de estresse com a função putpixel(), [montamos um vídeo](https://www.youtube.com/watch?v=_GSBJzKuFSA) que mostra a renderização de vários pontos aleatórios da tela.
