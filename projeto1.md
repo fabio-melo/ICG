@@ -110,15 +110,16 @@ while(true){
     if (e2 >= dy) { err += dy; x0 += sx; } /* e_xy+e_x > 0 */
     if (e2 <= dx) { err += dx; y0 += sy; } /* e_xy+e_y < 0 */
 }
-}
-```{% endraw %}
+}{% endraw %}
 
+```
 <p align="center">
 	<br>
 	<img src="./images/3_lines.png">
 	<h5 align="center">Figura 3: exemplos de linhas gerandas pelo drawLine()</h5>
 	<br>
 </p>
+
 
 ## Dificuldades:
 * Em primeiro lugar, minha falta de familiaridade e experiência com a linguagem (C++), o que resultou em dezenas de tentativas de montagens de estruturas pythonescas e esquecimentos de ponto-e-virgula. até pensei em montar usando orientação a objeto, mas por fim decidir montar de maneira imperativa.
